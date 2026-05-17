@@ -1,0 +1,112 @@
+/* 1. 浏览器重置：消除不同浏览器默认样式差异（Normalize 核心思路） */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 统一盒模型，兼容怪异模式 */
+}
+
+/* 2. 基础样式：兼容多浏览器字体、自适应布局 */
+body {
+  font-family: "Microsoft YaHei", "微软雅黑", Arial, Helvetica, sans-serif; /* 增加后备中文字体 */
+  font-size: 14px; /* 基础字号，适配rem */
+  line-height: 1.5; /* 行高增强可读性，兼容低版本浏览器 */
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f0;
+  position: relative;
+  /* 兼容IE的min-width，防止内容溢出 */
+  min-width: 320px; /* 适配移动端最小宽度 */
+}
+
+/* 3. 分类模块样式：统一且兼容 */
+.category {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* 兼容IE9+的圆角/阴影，低版本IE会自动降级为直角/无阴影 */
+  -webkit-border-radius: 8px; /* 兼容webkit内核（老Chrome/Safari） */
+  -moz-border-radius: 8px; /* 兼容老Firefox */
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category h2 {
+  margin: 0 0 15px 0;
+  padding: 10px;
+  background: #4a90e2;
+  color: #fff;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  font-size: 1.1em;
+  /* 兼容IE的字体加粗 */
+  font-weight: bold;
+}
+
+.category a {
+  display: block;
+  margin: 8px 0;
+  color: #333;
+  text-decoration: none;
+  /* 过渡动画兼容 */
+  transition: color 0.3s ease;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+}
+
+.category a:hover {
+  color: #4a90e2;
+  text-decoration: underline;
+  /* 兼容IE:hover（IE7+支持a:hover） */
+}
+
+/* 4. 固定定位图片：兼容多浏览器定位 */
+.anime-character {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+  z-index: 999;
+  /* 兼容IE的z-index层级 */
+  max-width: 100%; /* 移动端适配，防止图片溢出 */
+  height: auto; /* 保持宽高比 */
+}
+
+/* 5. 移动端响应式兼容（适配手机/平板） */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px; /* 移动端减少内边距 */
+  }
+
+  .category {
+    padding: 10px;
+  }
+
+  .anime-character {
+    width: 100px; /* 移动端缩小图片 */
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .category h2 {
+    font-size: 1em; /* 移动端标题字号适配 */
+  }
+}
+
+/* 6. IE特殊兼容（可选，针对IE9以下） */
+/* 只有IE能识别的条件注释写法，需写在HTML中，示例：
+<!--[if lte IE 8]>
+  <style>
+    .category {
+      border-radius: 0; /* IE8及以下不支持圆角，直接去掉 */
+      box-shadow: none; /* IE8及以下不支持阴影，直接去掉 */
+    }
+    .anime-character {
+      position: absolute; /* IE6不支持fixed，降级为absolute */
+    }
+  </style>
+<![endif]-->
+*/
